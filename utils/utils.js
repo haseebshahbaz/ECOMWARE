@@ -11,6 +11,7 @@ import {
   getFirestore,
   doc,
   setDoc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 import {
   getStorage,
@@ -51,6 +52,7 @@ export {
   signInWithEmailAndPassword,
   doc,
   setDoc,
+  getDoc,
   ref,
   uploadBytes,
   getDownloadURL,

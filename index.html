@@ -18,9 +18,15 @@
       </a>
       <div class="flex items-center space-x-6 rtl:space-x-reverse">
           <a href="tel:5541251234" class="text-sm  text-gray-500 dark:text-white hover:underline">(555) 412-1234</a>
-          <a href="auth/login/login.html" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline">Login</a>
+          <div class="relative">
+            <img class="w-10 h-10 rounded-full" src="./avatoricon.png" style="display: none;" alt="Pic" id="userImg">
+            <span class="top-0 left-7 absolute  w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" style="display: none;" id="img_green_dot"></span>
+        </div>
+          <button id="mainlogin">Login</button>
+          <button id="logout-button">Logout</button>
       </div>
   </div>
+  
 </nav>
 <nav class="bg-gray-50 dark:bg-gray-700">
   <div class="max-w-screen-xl px-4 py-3 mx-auto">
@@ -43,14 +49,11 @@
   </div>
 </nav>
 
-    <button id="logout-button">Logout</button>
+    
     
 
 
-      
-  
-
-    <script type="module" src="index.js"></script>
+<script type="module" src="index.js"></script>
 </body>
 </html>
 
