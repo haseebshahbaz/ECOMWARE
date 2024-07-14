@@ -23,9 +23,11 @@ logoutbutton.addEventListener("click", ()=>{
   auth.signOut().then(() => {
     console.log("User signed out.");
     // Redirect to login page or update UI accordingly
-    window.location.href = '../../auth/login/login.html'; // Replace with your login page URL
+    window.location.href = '../../auth/login/login.html';
 }).catch((error) => {
     console.error("Sign out error:", error);
 })});
+
+
 
 

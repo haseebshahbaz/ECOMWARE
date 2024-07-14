@@ -17,8 +17,10 @@ login_btn.addEventListener("submit", function (e) {
         // ...
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        
+
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerText = "Incorrect Creditionals";
       });
 });
 
