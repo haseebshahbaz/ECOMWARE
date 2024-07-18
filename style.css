@@ -131,6 +131,35 @@ nav .categories_section ul li a:hover {
     cursor: pointer;
 }
 
+/* style.css */
+
+/* Container styles */
+.search-container {
+    max-width: 32rem; /* Adjust max-width as needed */
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Input field styles */
+#search-dropdown {
+    width: calc(100% - 3.5rem);
+    padding: 0.75rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem 0 0 0.5rem;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+#searchQuery{
+    border: none;
+    border-radius: 5px;
+}
+
+
 
 @media (max-width: 768px) {
     .product-card {

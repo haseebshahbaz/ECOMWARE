@@ -14,26 +14,49 @@
         <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="./logomain.png" class="h-8" alt="ECOMWARE Logo" style="background-color: rgb(255, 255, 255)" />
         </a>
-        <form class="flex items-center space-x-3 rtl:space-x-reverse w-full max-w-lg mx-auto">
+        <form id="searchForm" class="flex items-center space-x-3 rtl:space-x-reverse w-full max-w-lg mx-auto">
             <div id="navbar_search" class="relative w-full">
-                <input type="search" id="search-dropdown" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Shirts, Pants, Shoes" required />
+                <input type="search" id="searchQuery" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500" placeholder="Search Shirts, Pants, Shoes" required />
                 <button type="submit" id="search-dropdown2" class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/></svg>
                     <span class="sr-only">Search</span>
                 </button>
             </div>
         </form>
-        <div class="flex items-center space-x-6 rtl:space-x-reverse">
-            <a href="./my products/myproducts.html" id="myProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">My Products</a>
-            <a href="./add product/add.html" id="addProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Add Products</a>
-            <div class="relative">
-                <img class="w-12 h-12 rounded-full" src="./avatoricon.png" style="display: none;" alt="User Pic" id="userImg">
-                <span class="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" style="display: none;" id="img_green_dot"></span>
+           <div class="relative" id="userProfileDropdown">
+                    <img type="button" class="w-10 h-15 rounded-full cursor-pointer" src="./avatoricon.png" alt="Profile Pic" id="userImage" />
+                    <span class="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" style="display: none;" id="img_green_dot"></span>
+                    <!-- Dropdown menu -->
+                    <div id="userDropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 absolute right-0 mt-2">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div id="userName">Ahmed Nawaz Gondal</div>
+                            <div class="font-medium truncate" id="userEmail">ahmed@gmail.com</div>
+                        </div>
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+                            <!-- <li>
+                                <a class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' href='/'>Dashboard</a>
+                            </li> -->
+                            <li>
+                                <a href="./my products/myproducts.html" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Product</a>
+                            </li>
+                            <li>
+                                <a class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white' href='./add product/add.html'>Add Product</a>
+                            </li>
+                            <!-- <li id="cartnumber">
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cart</a>
+                            </li> -->
+                        </ul>
+                        <div class="py-1">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" id="logoutBtn">Sign out</a>
+                        </div>
+                    </div>
+                </div>
+                <button id="mainlogin" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Login</button>
             </div>
-            <button id="mainlogin" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Login</button>
-            <button id="logout-button" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Logout</button>
         </div>
-    </div>
+    </nav>
+    
+
 </nav>
 
     <main> 
