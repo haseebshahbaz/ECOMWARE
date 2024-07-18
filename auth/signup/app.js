@@ -10,78 +10,82 @@ import {
   db,
 } from "../../utils/utils.js";
 
-const signup_btn = document.getElementById("signup_btn");
 const submit_btn = document.getElementById("submit_btn");
 
-signup_btn.addEventListener("submit", function (e) {
+submit_btn.addEventListener("click", function (e) {
   e.preventDefault();
 
-  const fullName = e.target[0].value;
-  const fatherName = e.target[1].value;
-  const email = e.target[2].value;
-  const password = e.target[3].value;
-  const confirmPassword = e.target[4].value;
-  const img = e.target[5].files[0];
-  const submitBtn = e.target[6];
+  const fullName = document.getElementById("fullName").value;
+  const fatherName = document.getElementById("fatherName").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const img = document.getElementById("img").files[0];
+
+  // Check if passwords match
+  if (password !== confirmPassword) {
+    alert("Passwords do not match");
+    return;
+  }
 
   const userInfo = {
     fullName,
     fatherName,
     email,
     password,
-    confirmPassword,
     img,
   };
 
-  submit_btn.disable = true;
-  submit_btn.innerText = "Loading...."
+  submit_btn.disabled = true;
+  submit_btn.innerText = "Loading...";
+
   createUserWithEmailAndPassword(auth, email, password)
-    .then((user) => {
-      // Signed up
-      console.log(user.user.uid);
-      //Created User Ref
-      const userRef = ref(storage, `user/${user.user.uid}`);
-      //Upload Profile Pic
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log("User signed up:", user.uid);
+
+      const userRef = ref(storage, `user/${user.uid}`);
+      
       uploadBytes(userRef, img)
         .then(() => {
-          console.log("user image uploaded");
-          //Getting the Profile Pic which we just Uploaded
+          console.log("User image uploaded successfully");
           getDownloadURL(userRef)
             .then((url) => {
-              console.log("url agaya =>", url);
-
-              //Updated the userinfo object
               userInfo.img = url;
 
-                //Created user document Ref
-              const userDbRef = doc(db, "users", user.user.uid )
+              const userDocRef = doc(db, "users", user.uid);
 
-              //Set this doc to db
-              setDoc(userDbRef , userInfo).then(()=>{
-                console.log("user doc uploaed db");
-                window.location.href = "/";
-                submitBtn.disable = true
-              })
-
+              setDoc(userDocRef, userInfo)
+                .then(() => {
+                  console.log("User info saved to Firestore");
+                  // Redirect to home page
+                  window.location.href = "/";
+                })
+                .catch((error) => {
+                  console.error("Error saving user info to Firestore:", error.message);
+                  alert("Error saving user info to Firestore");
+                });
             })
-            .catch(() => {
-              {alert(error)
-                submit_btn.disable = false;
-                submit_btn.innerText = "Submit"
-              };
+            .catch((error) => {
+              console.error("Error getting download URL:", error.message);
+              alert("Error getting download URL");
             });
         })
-        .catch(() => {
-            {alert(error)
-                submit_btn.disable = false;
-                submit_btn.innerText = "Submit"
-              };
+        .catch((error) => {
+          console.error("Error uploading image:", error.message);
+          alert("Error uploading image");
         });
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // ..
+      console.error("Error signing up:", error.message);
+      alert("Error signing up: " + error.message);
+    })
+    .finally(() => {
+      // This part ensures the button state until the redirection
+      // You can adjust the timing of the timeout as needed
+      setTimeout(() => {
+        submit_btn.disabled = false;
+        submit_btn.innerText = "Submit";
+      }, 10000); // Adjust the timeout as per your application's needs
     });
 });
-

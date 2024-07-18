@@ -1,0 +1,154 @@
+*{
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+#search-dropdown{
+    border-radius: 5px;
+    border: none;
+}
+
+#search-dropdown2{
+    border-radius: 5px;
+    border: none;
+}
+
+.categories_section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.categories_section ul li {
+    font-size: larger;
+    font-weight: bold;
+}
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styles */
+nav {
+    width: 100%;
+}
+
+nav .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+nav a {
+    color: #000;
+    text-decoration: none;
+}
+
+nav .categories_section ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav .categories_section ul li {
+    margin: 0.5rem;
+}
+
+nav .categories_section ul li a {
+    color: #333;
+    text-decoration: none;
+}
+
+nav .categories_section ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flex form {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 1rem;
+    }
+
+    .flex .categories_section ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .flex .categories_section ul li {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/*My Product FIle Styling*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+    .product-card {
+        flex: 1 1 calc(50% - 16px); /* Adjust width for tablets */
+        max-width: calc(50% - 16px);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card {
+        flex: 1 1 100%; /* Full width for mobile */
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .flex .categories_section ul li {
+        font-size: 0.9rem;
+    }
+}

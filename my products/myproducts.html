@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <title>My Products</title>
+</head>
+<body>
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+            <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="../logomain.png" class="h-8" alt="ECOMWARE Logo" style="background-color: rgb(255, 255, 255)" />
+            </a>
+            <div class="text-lg font-semibold text-center flex-1">
+                <span class="block text-gray-800 dark:text-white">My Products</span>
+            </div>
+            <div class="flex items-center space-x-6 rtl:space-x-reverse">
+                <a href="../add product/add.html" id="addProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Add Products</a>
+                <div class="relative">
+                    <img class="w-12 h-12 rounded-full" src="../avatoricon.png" style="display: none;" alt="User Pic" id="userImg">
+                    <span class="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" style="display: none;" id="img_green_dot"></span>
+                </div>
+                <a href="/" id="addProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div id="product_card_container" class="flex flex-wrap justify-center"></div>
+
+        <!-- Update Product Modal -->
+        <div id="updateModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Update Product</h2>
+                <input type="hidden" id="updateProductId">
+                <label for="updateProductName">Product Name:</label>
+                <input type="text" id="updateProductName" required>
+                <label for="updateProductDesce">Description:</label>
+                <input type="text" id="updateProductDesce" required>
+                <label for="updateProductPrice">Price:</label>
+                <input type="text" id="updateProductPrice" required>
+                <label for="updateProductCategory">Category:</label>
+                <input type="text" id="updateProductCategory" required>
+                <button id="saveProductBtn">Save</button>
+            </div>
+        </div>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
