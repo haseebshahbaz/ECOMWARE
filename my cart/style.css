@@ -1,0 +1,56 @@
+/* Add your styles here */
+
+.relative {
+    position: relative;
+  }
+  
+  .absolute {
+    position: absolute;
+  }
+  
+  .top-0 {
+    top: 0;
+  }
+  
+  .right-0 {
+    right: 0;
+  }
+  
+  .bg-red-500 {
+    background-color: #f56565;
+  }
+  
+  .text-white {
+    color: #ffffff;
+  }
+  
+  .rounded-full {
+    border-radius: 9999px;
+  }
+  
+  .text-xs {
+    font-size: 0.75rem;
+  }
+  
+  .w-5 {
+    width: 1.25rem;
+  }
+  
+  .h-5 {
+    height: 1.25rem;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  /* Add any additional styles as needed */
+  
