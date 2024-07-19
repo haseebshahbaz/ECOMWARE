@@ -44,7 +44,7 @@ addProductForm.addEventListener("submit", (e) => {
           const productCollection = collection(db, "products");
           addDoc(productCollection, productInfo).then(() => {
               console.log("Document ADDED");
-              window.location.href = "/";
+              window.location.href = "../index.html";
           }).catch((error) => {
               console.error("Error adding document: ", error);
               addProductSubmit.disabled = false; // Re-enable the button in case of error

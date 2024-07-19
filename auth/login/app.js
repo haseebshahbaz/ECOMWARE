@@ -18,7 +18,7 @@ login_btn.addEventListener("submit", function (e) {
       .then((userCredential) => {
         // Signed in 
         
-        window.location.href = "/"
+        window.location.href = "../../index.html"
         
         
         // ...

@@ -59,7 +59,7 @@ submit_btn.addEventListener("click", function (e) {
                 .then(() => {
                   console.log("User info saved to Firestore");
                   // Redirect to home page
-                  window.location.href = "/";
+                  window.location.href = "../../index.html";
                 })
                 .catch((error) => {
                   console.error("Error saving user info to Firestore:", error.message);
