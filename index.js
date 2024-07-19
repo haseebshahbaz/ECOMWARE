@@ -28,118 +28,102 @@ const product_card_container = document.getElementById("product_card_container")
 const userProfileDropdown = document.getElementById("userProfileDropdown");
 const searchForm = document.getElementById("searchForm");
 const searchQuery = document.getElementById("searchQuery");
+const mainsSignUp = document.getElementById("mainsSignUp");
 
 // Ensure `addToCart` is accessible globally
 window.addToCart = async function(productId) {
   console.log("addToCart called with productId:", productId);
-  const addToCartBtn = document.getElementById("addToCartBtn");
+  const addToCartBtn = document.getElementById(`addToCartBtn-${productId}`);
   addToCartBtn.disabled = true;
-  addToCartBtn.innerText = "Adding"
+  addToCartBtn.innerText = "Adding...";
+  addToCartBtn.classList.add("bg-gray-500", "cursor-not-allowed");
+
   const user = auth.currentUser;
   if (!user) {
     alert("You need to be logged in to add products to the cart.");
+    addToCartBtn.disabled = false;
+    addToCartBtn.innerText = "Add to Cart";
+    addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
     return;
   }
 
-  const productRef = doc(db, "products", productId);
-  const productDoc = await getDoc(productRef);
+  try {
+    const productRef = doc(db, "products", productId);
+    const productDoc = await getDoc(productRef);
 
-  if (productDoc.exists()) {
-    const product = productDoc.data();
-    const cartRef = doc(db, "carts", user.uid);
-    const cartDoc = await getDoc(cartRef);
+    if (productDoc.exists()) {
+      const product = productDoc.data();
+      const cartRef = doc(db, "carts", user.uid);
+      const cartDoc = await getDoc(cartRef);
 
-    if (cartDoc.exists()) {
-      await updateDoc(cartRef, {
-        products: arrayUnion({...product, id: productId, quantity: 1}),
-      });
+      if (cartDoc.exists()) {
+        await updateDoc(cartRef, {
+          products: arrayUnion({ ...product, id: productId, quantity: 1 }),
+        });
+      } else {
+        await setDoc(cartRef, {
+          userId: user.uid,
+          products: [{ ...product, id: productId, quantity: 1 }],
+        });
+      }
+
+      alert("Product added to cart!");
+      addToCartBtn.innerText = "Added";
+      addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
+      addToCartBtn.classList.add("bg-green-500");
+      getCartItemsCount();
     } else {
-      await setDoc(cartRef, {
-        userId: user.uid,
-        products: [{...product, id: productId, quantity: 1}],
-      });
+      alert("Product not found.");
+      addToCartBtn.disabled = false;
+      addToCartBtn.innerText = "Add to Cart";
+      addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
     }
-    alert("Product added to cart!");
-    addToCartBtn.innerText = "Added"
-    getCartItemsCount();
-  } else {
-    alert("Product not found.");
+  } catch (error) {
+    console.error("Error adding to cart: ", error);
+    alert("There was an error adding the product to the cart. Please try again.");
+    addToCartBtn.disabled = false;
+    addToCartBtn.innerText = "Add to Cart";
+    addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
   }
 };
 
+
 // window.addToCart = async function(productId) {
 //   console.log("addToCart called with productId:", productId);
-
-//   // Find the button by ID and ensure it's present
 //   const addToCartBtn = document.getElementById("addToCartBtn");
-//   if (!addToCartBtn) {
-//     console.error("Button element with ID 'addToCartBtn' not found.");
-//     return;
-//   }
-
-//   // Disable the button and set the text to "Adding..."
 //   addToCartBtn.disabled = true;
-//   addToCartBtn.innerText = "Adding...";
-
+//   addToCartBtn.innerText = "Adding"
 //   const user = auth.currentUser;
 //   if (!user) {
 //     alert("You need to be logged in to add products to the cart.");
-//     addToCartBtn.disabled = false;
-//     addToCartBtn.innerText = "Add to Cart";
 //     return;
 //   }
 
-//   try {
-//     const productRef = doc(db, "products", productId);
-//     const productDoc = await getDoc(productRef);
+//   const productRef = doc(db, "products", productId);
+//   const productDoc = await getDoc(productRef);
 
-//     if (!productDoc.exists()) {
-//       alert("Product not found.");
-//       addToCartBtn.innerText = "Add to Cart";
-//       return;
-//     }
-
+//   if (productDoc.exists()) {
 //     const product = productDoc.data();
 //     const cartRef = doc(db, "carts", user.uid);
 //     const cartDoc = await getDoc(cartRef);
 
-//     let products;
 //     if (cartDoc.exists()) {
-//       products = cartDoc.data().products || [];
-//       const productIndex = products.findIndex(item => item.id === productId);
-
-//       if (productIndex > -1) {
-//         // Product already in cart, update quantity
-//         products[productIndex].quantity = (products[productIndex].quantity || 1) + 1;
-//         await updateDoc(cartRef, { products });
-//       } else {
-//         // Add new product to cart
-//         products.push({ ...product, id: productId, quantity: 1 });
-//         await updateDoc(cartRef, { products });
-//       }
+//       await updateDoc(cartRef, {
+//         products: arrayUnion({...product, id: productId, quantity: 1}),
+//       });
 //     } else {
-//       // Create a new cart with the product
-//       products = [{ ...product, id: productId, quantity: 1 }];
-//       await setDoc(cartRef, { userId: user.uid, products });
+//       await setDoc(cartRef, {
+//         userId: user.uid,
+//         products: [{...product, id: productId, quantity: 1}],
+//       });
 //     }
-
 //     alert("Product added to cart!");
-//     addToCartBtn.innerText = "Added";
-//   } catch (error) {
-//     console.error("Error adding to cart: ", error);
-//     alert("There was an error adding the product to the cart. Please try again.");
-//     addToCartBtn.innerText = "Add to Cart";
-//   } finally {
-//     // Ensure the button is re-enabled if not already set to "Added"
-//     if (addToCartBtn.innerText !== "Added") {
-//       addToCartBtn.innerText = "Add to Cart";
-//     }
-//     addToCartBtn.disabled = false;
+//     addToCartBtn.innerText = "Added"
+//     getCartItemsCount();
+//   } else {
+//     alert("Product not found.");
 //   }
 // };
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -163,10 +147,16 @@ mainlogin.addEventListener("click", () => {
   window.location.href = "auth/login/login.html";
 });
 
+mainsSignUp.addEventListener("click", () => {
+  window.location.href = "auth/signup/signup.html";
+});
+
+// Call getAllProducts inside onAuthStateChanged to ensure products are loaded based on user state
 onAuthStateChanged(auth, (user) => {
   if (user) {
     const uid = user.uid;
     mainlogin.style.display = "none";
+    mainsSignUp.style.display = "none";
     userImg.style.display = "inline-block";
     img_green_dot.style.display = "inline-block";
     getUserInfo(uid);
@@ -174,6 +164,7 @@ onAuthStateChanged(auth, (user) => {
   } else {
     userProfileDropdown.style.display = "none";
     mainlogin.style.display = "inline-block";
+    mainsSignUp.style.display = "inline-block";
     userImg.style.display = "none";
     img_green_dot.style.display = "none";
     addProduct.style.display = "none";
@@ -181,11 +172,14 @@ onAuthStateChanged(auth, (user) => {
     logoutButton.style.display = "none";
     updateCartCount(0); // Reset cart count if user is logged out
   }
+  getAllProducts(); // Ensure products are re-rendered based on user state
 });
 
+// Function to handle logout
 const handleLogout = () => {
   signOut(auth).then(() => {
     console.log("User signed out.");
+    updateCartCount(0); // Reset cart count on logout
   }).catch((error) => {
     console.error("Sign out error:", error);
   });
@@ -212,19 +206,34 @@ function getUserInfo(uid) {
 async function getAllProducts() {
   try {
     const querySnapshot = await getDocs(collection(db, "products"));
+    const user = auth.currentUser;
+    let userCartProducts = [];
+
+    if (user) {
+      const cartRef = doc(db, "carts", user.uid);
+      const cartDoc = await getDoc(cartRef);
+      if (cartDoc.exists()) {
+        userCartProducts = cartDoc.data().products.map(product => product.id);
+      }
+    }
+
     product_card_container.innerHTML = "";
     querySnapshot.forEach((doc) => {
       const product = doc.data();
       product.id = doc.id; // Add the product ID to the product object
-      renderProduct(product);
+      renderProduct(product, userCartProducts.includes(product.id));
     });
   } catch (err) {
     alert(err);
   }
 }
 
-function renderProduct(product) {
+function renderProduct(product, isInCart) {
   const { img, productName, productDesce, productPrice, productCategory, id } = product;
+  const buttonText = isInCart ? "Added" : "Add to Cart";
+  const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
+  const buttonDisabled = isInCart ? "disabled" : "";
+
   const productCard = `<div class="bg-white shadow-md rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 m-5">
     <img src="${img}" alt="${productName} Image" class="w-full h-48 object-cover" />
     <div class="p-4">
@@ -233,7 +242,7 @@ function renderProduct(product) {
         <p class="text-gray-600 mb-2"><b>Category</b>: ${productCategory}</p>
         <p class="text-gray-600 mb-2"><b>Price</b>: ${productPrice}</p>
         <div class="flex justify-between items-center">
-            <button id="addToCartBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none" onclick='addToCart("${id}")'>Add To Cart</button>
+            <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
         </div>
     </div>
   </div>`;
@@ -275,6 +284,7 @@ async function searchProducts(queryText) {
     alert(err);
   }
 }
+
 
 // Function to update cart count in the navbar
 function updateCartCount(count) {

@@ -86,6 +86,6 @@ submit_btn.addEventListener("click", function (e) {
       setTimeout(() => {
         submit_btn.disabled = false;
         submit_btn.innerText = "Submit";
-      }, 10000); // Adjust the timeout as per your application's needs
+      }, 20000); // Adjust the timeout as per your application's needs
     });
 });

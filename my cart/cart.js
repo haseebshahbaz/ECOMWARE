@@ -50,7 +50,7 @@ import {
           <button class="bg-gray-300 text-black px-2 py-1 rounded-r-md hover:bg-gray-400 focus:outline-none" onclick='increaseQuantity(${index})'>+</button>
         </div>
         <div class="ml-4">
-          <p class="text-lg font-bold">$${(product.productPrice * quantity).toFixed(2)}</p>
+          <p class="text-lg font-bold">Rs${(product.productPrice * quantity).toFixed(2)}</p>
           <button class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none mt-2" onclick='removeFromCart(${index})'>Remove</button>
         </div>
       </div>`;
@@ -66,7 +66,7 @@ import {
   
     cartSummary.innerHTML = `<div class="flex justify-between items-center">
       <p class="text-lg font-bold">Total Items: ${totalItems}</p>
-      <p class="text-lg font-bold">Total Price: $${total.toFixed(2)}</p>
+      <p class="text-lg font-bold">Total Price: Rs${total.toFixed(2)}</p>
       <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none">Proceed to Checkout</button>
     </div>`;
   }
