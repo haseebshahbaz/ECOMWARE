@@ -1,4 +1,3 @@
-
 import {
   auth,
   db,
@@ -28,6 +27,7 @@ const product_card_container = document.getElementById("product_card_container")
 const userProfileDropdown = document.getElementById("userProfileDropdown");
 const searchForm = document.getElementById("searchForm");
 const searchQuery = document.getElementById("searchQuery");
+const productsSection = document.getElementById("productsSection");
 const mainsSignUp = document.getElementById("mainsSignUp");
 
 // Ensure `addToCart` is accessible globally
@@ -67,7 +67,7 @@ window.addToCart = async function(productId) {
         });
       }
 
-      alert("Product added to cart!");
+      
       addToCartBtn.innerText = "Added";
       addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
       addToCartBtn.classList.add("bg-green-500");
@@ -86,45 +86,6 @@ window.addToCart = async function(productId) {
     addToCartBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
   }
 };
-
-
-// window.addToCart = async function(productId) {
-//   console.log("addToCart called with productId:", productId);
-//   const addToCartBtn = document.getElementById("addToCartBtn");
-//   addToCartBtn.disabled = true;
-//   addToCartBtn.innerText = "Adding"
-//   const user = auth.currentUser;
-//   if (!user) {
-//     alert("You need to be logged in to add products to the cart.");
-//     return;
-//   }
-
-//   const productRef = doc(db, "products", productId);
-//   const productDoc = await getDoc(productRef);
-
-//   if (productDoc.exists()) {
-//     const product = productDoc.data();
-//     const cartRef = doc(db, "carts", user.uid);
-//     const cartDoc = await getDoc(cartRef);
-
-//     if (cartDoc.exists()) {
-//       await updateDoc(cartRef, {
-//         products: arrayUnion({...product, id: productId, quantity: 1}),
-//       });
-//     } else {
-//       await setDoc(cartRef, {
-//         userId: user.uid,
-//         products: [{...product, id: productId, quantity: 1}],
-//       });
-//     }
-//     alert("Product added to cart!");
-//     addToCartBtn.innerText = "Added"
-//     getCartItemsCount();
-//   } else {
-//     alert("Product not found.");
-//   }
-// };
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const userImage = document.getElementById('userImage');
@@ -234,55 +195,98 @@ function renderProduct(product, isInCart) {
   const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
   const buttonDisabled = isInCart ? "disabled" : "";
 
-  const productCard = `<div class="bg-white shadow-md rounded-lg overflow-hidden w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4 m-5">
-    <img src="${img}" alt="${productName} Image" class="w-full h-48 object-cover" />
-    <div class="p-4">
-        <h2 class="text-xl font-bold mb-2">${productName}</h2>
-        <p class="text-gray-600 mb-2"><b>Description</b>: ${productDesce}</p>
-        <p class="text-gray-600 mb-2"><b>Category</b>: ${productCategory}</p>
-        <p class="text-gray-600 mb-2"><b>Price</b>: ${productPrice}</p>
-        <div class="flex justify-between items-center">
-            <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
-        </div>
-    </div>
-  </div>`;
-  product_card_container.innerHTML += productCard;
+  const productCard = `
+      <div class="product-card w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
+          <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 h-full flex flex-col">
+              <img src="${img}" alt="${productName} Image" class="w-full h-32 object-cover mb-4" />
+              <div class="p-4 flex-grow flex flex-col justify-between">
+                  <div>
+                      <h2 class="text-lg font-semibold mb-1 text-gray-900 truncate">${productName}</h2>
+                      <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Description:</span> ${productDesce}</p>
+                      <p class="text-gray-700 mb-2"><span class="font-semibold">Category:</span> ${productCategory}</p>
+                      <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Price:</span> Rs: ${productPrice}</p>
+                  </div>
+                  <div class="flex justify-between items-center mt-2">
+                      <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
+                  </div>
+              </div>
+          </div>
+      </div>`;
+  
+  const container = document.getElementById('product_card_container');
+  if (!container.classList.contains('container')) {
+      container.classList.add('container', 'mx-auto', 'p-4', 'flex', 'flex-wrap', '-mx-2');
+  }
+  container.innerHTML += productCard;
 }
+
+// function renderProduct(product, isInCart) {
+//   const { img, productName, productDesce, productPrice, productCategory, id } = product;
+//   const buttonText = isInCart ? "Added" : "Add to Cart";
+//   const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
+//   const buttonDisabled = isInCart ? "disabled" : "";
+
+//   const productCard = `<div class="container mx-auto p-4">
+//     <div class="flex flex-wrap -mx-2">
+//         <div class="product-card w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
+//             <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+//                 <img src="${img}" alt="${productName} Image" class="w-full h-32 object-cover mb-4" />
+//                 <div class="p-4">
+//                     <h2 class="text-lg font-semibold mb-1 text-gray-900 truncate">${productName}</h2>
+//                     <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Description:</span> ${productDesce}</p>
+//                     <p class="text-gray-700 mb-2"><span class="font-semibold">Category:</span> ${productCategory}</p>
+//                     <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Price:</span> Rs: ${productPrice}</p>
+//                     <div class="flex justify-between items-center mt-2">
+//                         <button id="addToCartBtn-${id}" class="${buttonClass} bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//         <!-- Repeat above div for other product cards -->
+//     </div>
+// </div>`;
+//   product_card_container.innerHTML += productCard;
+// }
 
 searchForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const queryText = searchQuery.value.trim().toLowerCase();
   if (queryText) {
-    await searchProducts(queryText);
+      await searchProducts(queryText);
+      scrollToProducts();
   }
 });
 
 async function searchProducts(queryText) {
   try {
-    const querySnapshot = await getDocs(collection(db, "products"));
-    product_card_container.innerHTML = "";
-    let foundResults = false; // Flag to track if any products are found
+      const querySnapshot = await getDocs(collection(db, "products"));
+      product_card_container.innerHTML = "";
+      let foundResults = false; // Flag to track if any products are found
 
-    querySnapshot.forEach((doc) => {
-      const product = doc.data();
-      if (
-        product.productName.toLowerCase().includes(queryText) ||
-        product.productDesce.toLowerCase().includes(queryText) ||
-        product.productCategory.toLowerCase().includes(queryText)
-      ) {
-        renderProduct(product);
-        foundResults = true; // Set flag to true if a matching product is found
+      querySnapshot.forEach((doc) => {
+          const product = doc.data();
+          if (
+              product.productName.toLowerCase().includes(queryText) ||
+              product.productDesce.toLowerCase().includes(queryText) ||
+              product.productCategory.toLowerCase().includes(queryText)
+          ) {
+              renderProduct(product);
+              foundResults = true; // Set flag to true if a matching product is found
+          }
+      });
+
+      // If no products are found, display a message
+      if (!foundResults) {
+          product_card_container.innerHTML = `<div class="text-center text-gray-600 py-4">No products found for '${queryText}'.</div>`;
       }
-    });
-
-    // If no products are found, display a message
-    if (!foundResults) {
-      product_card_container.innerHTML = `<div class="text-center text-gray-600 py-4">No products found for '${queryText}'.</div>`;
-    }
 
   } catch (err) {
-    alert(err);
+      alert(err);
   }
+}
+
+function scrollToProducts() {
+  productsSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 
