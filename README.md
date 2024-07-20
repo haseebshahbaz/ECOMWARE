@@ -61,11 +61,11 @@ Contains the main pages of the application.
 4. View your past orders in the Order History page.
 5. Add new products through the Add Product page and view them in My Products.
 
-# Contributing
+##  Contributing
 Contributions are welcome! Please create a pull request or open an issue for any changes or improvements.
 
 
-# Detailed Description of Main Files
+##  Detailed Description of Main Files
 index.html
 
 The main HTML structure for the application, including:
@@ -82,7 +82,7 @@ The main HTML structure for the application, including:
 - **Search Functionality**: Filters products based on user search queries.
 - **Event Listeners**: Handles various user interactions like clicking the cart icon or logging out.
 
-# utils.js
+## utils.js
 Utility functions and Firebase configuration:
 
 - **Firebase Initialization**: Sets up Firebase services.
