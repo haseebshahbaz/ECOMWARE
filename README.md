@@ -67,32 +67,27 @@ Contributions are welcome! Please create a pull request or open an issue for any
 
 # Detailed Description of Main Files
 index.html
+
 The main HTML structure for the application, including:
 
-# Navbar: 
-Navigation links for home, cart, and order history.
-
-# Product Section: 
-Displays products available for purchase.
-
-# Search Bar: 
-Allows users to search for products.
-
-# User Profile: 
-Displays user information when logged in.
+- **Navbar**: Navigation links for home, cart, and order history.
+- **Prodouct Section**: Displays products available for purchase.
+- **Search Bar**: Allows users to search for products.
+- **User Profile**:Displays user information when logged in.
 
 
-# User Authentication: Sign-in, sign-out, and state change handling.
-Product Fetching and Display: Retrieves products from Firestore and displays them.
-Cart Management: Adds products to the cart and updates cart count.
-Search Functionality: Filters products based on user search queries.
-Event Listeners: Handles various user interactions like clicking the cart icon or logging out.
-utils.js
+- **User Authentication**:Sign-in, sign-out, and state change handling.
+- **Prodouct Fetching & Displaying**: Retrieves products from Firestore and displays them.
+- **Cart Management**: Adds products to the cart and updates cart count.
+- **Search Functionality**: Filters products based on user search queries.
+- **Event Listeners**: Handles various user interactions like clicking the cart icon or logging out.
+
+# utils.js
 Utility functions and Firebase configuration:
 
-# Firebase Initialization: Sets up Firebase services.
-Helper Functions:
-getUserProducts(userId): Fetches products created by a specific user.
-deleteProduct(productId): Deletes a product from Firestore.
-updateProduct(productId, updatedData): Updates product information in Firestore.
+- **Firebase Initialization**: Sets up Firebase services.
+- **Helper Functions**:
+- **getUserProducts(userId)**: Fetches products created by a specific user.
+- **deleteProduct(productId)**: Deletes a product from Firestore.
+- **updateProduct(productId, updatedData)**: Updates product information in Firestore.
 
