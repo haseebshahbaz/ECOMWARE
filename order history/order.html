@@ -8,8 +8,8 @@
 </head>
 <body class="">
     <!-- Navbar -->
-    <nav class="bg-white p-4 text-white" bg-white border-gray-200 dark:bg-gray-900>
-        <div class="container mx-auto flex justify-between items-center">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900" >
+        <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
             <div class="flex flex-wrap justify-between items-center ">
                 <a href="../index.html" class="font-bold text-lg"><img src="../websiteLogo.png" class="h-8" alt="ECOMWARE"></a>
             </div>
@@ -23,15 +23,24 @@
     <!-- Order History Container -->
     <div class="container mx-auto mt-8 p-4 bg-white shadow rounded" id="order-history-container">
         <h2 class="text-2xl font-bold mb-4">Order History</h2>
-        <div id="order-history">
+        <div id="loading-spinner" class="flex justify-center items-center">
+            <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-32 w-32"></div>
+        </div>
+        <div id="order-history" class="hidden">
             <!-- Order history will be injected here by JavaScript -->
         </div>
     </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-auth.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-firestore.js"></script>
-    <script src="path/to/your/utils.js"></script> -->
     <script src="order-history.js" type="module"></script>
+    <style>
+        .loader {
+            border-top-color: #3498db;
+            animation: spinner 1.5s linear infinite;
+        }
+        @keyframes spinner {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </body>
 </html>

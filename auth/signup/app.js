@@ -22,6 +22,11 @@ submit_btn.addEventListener("click", function (e) {
   const confirmPassword = document.getElementById("confirmPassword").value;
   const img = document.getElementById("img").files[0];
 
+  if (!fullName || !fatherName || !email || !password || !confirmPassword || !img) {
+    alert("All fields are required.");
+    return;
+  }
+
   // Check if passwords match
   if (password !== confirmPassword) {
     alert("Passwords do not match");
@@ -85,7 +90,20 @@ submit_btn.addEventListener("click", function (e) {
       // You can adjust the timing of the timeout as needed
       setTimeout(() => {
         submit_btn.disabled = false;
-        submit_btn.innerText = "Submit";
+        submit_btn.innerText = "Sign Up";
       }, 20000); // Adjust the timeout as per your application's needs
     });
 });
+
+function togglePasswordVisibility(id) {
+  const passwordInput = document.getElementById(id);
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+  } else {
+    passwordInput.type = "password";
+  }
+}
+
+// Add event listeners to toggle password visibility
+document.getElementById('togglePassword').addEventListener('click', () => togglePasswordVisibility('password'));
+document.getElementById('toggleConfirmPassword').addEventListener('click', () => togglePasswordVisibility('confirmPassword'));

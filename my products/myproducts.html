@@ -7,50 +7,55 @@
     <link rel="stylesheet" href="../style.css">
     <title>My Products</title>
 </head>
-<body>
+<body class="bg-gray-100">
     <nav class="bg-white border-gray-200 dark:bg-gray-900">
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
             <a href="../index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="../websiteLogo.png" class="h-8" alt="ECOMWARE Logo" style="background-color: rgb(255, 255, 255)" />
+                <img src="../websiteLogo.png" class="h-8" alt="ECOMWARE Logo" />
             </a>
-            <div class="text-lg font-semibold text-center flex-1">
-                <span class="block text-gray-800 dark:text-white">My Products</span>
-            </div>
             <div class="flex items-center space-x-6 rtl:space-x-reverse">
                 <a href="../add product/add.html" id="addProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Add Products</a>
-                <div class="relative">
-                    <img class="w-12 h-12 rounded-full" src="../avatoricon.png" style="display: none;" alt="User Pic" id="userImg">
-                    <span class="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" style="display: none;" id="img_green_dot"></span>
-                </div>
-                <a href="../index.html" id="addProduct" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Home</a>
+                <!-- <div class="relative">
+                    <img class="w-12 h-12 rounded-full" src="../avatoricon.png" alt="User Pic" id="userImg">
+                    <span class="absolute top-0 left-7 w-3.5 h-3.5 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full" id="img_green_dot"></span>
+                </div> -->
+                <a href="../index.html" id="homeLink" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Home</a>
             </div>
         </div>
     </nav>
 
-    <main>
-        <div id="product_card_container" class="flex flex-wrap justify-center"></div>
+    <main class="py-8 px-4"> 
+        <div class="text-lg font-semibold text-center flex-1">
+            <span class="block text-gray-800 dark:text-white">My Products</span>
+        </div>
+        <div id="product_card_container" class="flex flex-wrap items-center justify-center align "></div>
 
         <!-- Update Product Modal -->
-        <div id="updateModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
-                <h2>Update Product</h2>
+        <div id="updateModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg w-full">
+                <span class="absolute top-2 right-2 text-xl cursor-pointer" id="closeModal">&times;</span>
+                <h2 class="text-2xl font-bold mb-4">Update Product</h2>
                 <input type="hidden" id="updateProductId">
-                <label for="updateProductName">Product Name:</label>
-                <input type="text" id="updateProductName" required>
-                <label for="updateProductDesce">Description:</label>
-                <input type="text" id="updateProductDesce" required>
-                <label for="updateProductPrice">Price:</label>
-                <input type="text" id="updateProductPrice" required>
-                <label for="updateProductCategory">Category:</label>
-                <input type="text" id="updateProductCategory" required>
-                <button id="saveProductBtn">Save</button>
+                <div class="mb-4">
+                    <label for="updateProductName" class="block text-sm font-medium mb-1">Product Name:</label>
+                    <input type="text" id="updateProductName" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateProductDesce" class="block text-sm font-medium mb-1">Description:</label>
+                    <input type="text" id="updateProductDesce" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateProductPrice" class="block text-sm font-medium mb-1">Price:</label>
+                    <input type="text" id="updateProductPrice" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="updateProductCategory" class="block text-sm font-medium mb-1">Category:</label>
+                    <input type="text" id="updateProductCategory" class="w-full p-2 border border-gray-300 rounded-md" required>
+                </div>
+                <button id="saveProductBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Save</button>
             </div>
         </div>
     </main>
-
- 
-    
 
     <script type="module" src="app.js"></script>
 </body>

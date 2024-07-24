@@ -6,75 +6,51 @@
     <title>Checkout</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
 </head>
-<body>
-    <nav class="bg-white p-4 text-white" bg-white border-gray-200 dark:bg-gray-900>
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex flex-wrap justify-between items-center ">
-                <a href="../index.html" class="font-bold text-lg"><img src="../websiteLogo.png" class="h-8" alt="ECOMWARE"></a>
-            </div>
-            <div class="py-1">
-                <a href="../my cart/cart.html" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Go To Cart</a>
-                <a href="../order history/order.html" class="bg-blue-500 text-white px-2 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Order History</a>
+<body class="bg-gray-100">
+    <nav class="bg-white border-gray-200 dark:bg-gray-900">
+        <div class="container mx-auto flex justify-between items-center p-4">
+            <a href="../index.html" class="font-bold text-lg">
+                <img src="../websiteLogo.png" class="h-8" alt="ECOMWARE">
+            </a>
+            <div class="space-x-2">
+                <a href="../my cart/cart.html" class="bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Go To Cart</a>
+                <a href="../order history/order.html" class="bg-blue-500 text-white px-3 py-2 rounded-md hover:bg-blue-600 focus:outline-none text-sm">Order History</a>
             </div>
         </div>
     </nav>
 
-    <!-- Navbar -->
-    <!-- <nav class="bg-blue-600 p-4 text-white">
-        <div class="container mx-auto flex justify-between items-center"> -->
-            <!-- <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4"> -->
-                <!-- <a href="../index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="../websiteLogo.png" class="h-8" alt="ECOMWARE Logo" style="background-color: rgb(255, 255, 255)" />
-                </a>
-            <div>
-                <a href="../my cart/cart.html" class="mr-4">Cart</a>
-                <a href="../order history/order.html">Order History</a>
-            </div>
-        </div>
-    </nav> -->
-
     <!-- Checkout Container -->
-    <div class="container mx-auto mt-8 p-4 bg-white shadow rounded" id="checkout-container">
-        <h2 class="text-2xl font-bold mb-4">Checkout</h2>
+    <div id="checkout-container" class="container mx-auto mt-8 p-4 bg-white shadow rounded md:max-w-4xl">
+        <h2 class="text-2xl font-bold mb-4 text-center">Checkout</h2>
         <div id="checkout-details" class="mb-4">
             <!-- Cart items will be injected here by JavaScript -->
         </div>
         <form id="address-form" class="mb-4">
             <h3 class="text-xl font-semibold mb-2">Shipping Details</h3>
-            <div class="grid grid-cols-2 gap-4">
-                <input type="text" name="fullName" placeholder="Full Name" class="p-2 border rounded" required>
-                <input type="text" name="address" placeholder="Address" class="p-2 border rounded" required>
-                <input type="text" name="city" placeholder="City" class="p-2 border rounded" required>
-                <input type="text" name="state" placeholder="State" class="p-2 border rounded" required>
-                <input type="text" name="zip" placeholder="ZIP Code" class="p-2 border rounded" required>
-                <input type="text" name="phone" placeholder="Phone" class="p-2 border rounded" required>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <input type="text" name="fullName" placeholder="Full Name" class="p-2 border rounded w-full" required>
+                <input type="text" name="address" placeholder="Address" class="p-2 border rounded w-full" required>
+                <input type="text" name="city" placeholder="City" class="p-2 border rounded w-full" required>
+                <input type="text" name="state" placeholder="State" class="p-2 border rounded w-full" required>
+                <input type="text" name="zip" placeholder="ZIP Code" class="p-2 border rounded w-full" required>
+                <input type="text" name="phone" placeholder="Phone" class="p-2 border rounded w-full" required>
             </div>
-            <button type="submit" class="mt-4 p-2 bg-blue-500 text-white rounded">Update Address</button>
+            <button type="submit" class="mt-4 p-2 bg-blue-500 text-white rounded w-full md:w-auto">Update Address</button>
         </form>
         <div class="mb-4">
             <h3 class="text-xl font-semibold mb-2">Payment Method</h3>
-            <!-- <label class="block mb-2">
-                <input type="radio" name="paymentMethod" value="Credit Card" checked> Credit Card
-            </label>
             <label class="block mb-2">
-                <input type="radio" name="paymentMethod" value="PayPal"> PayPal
-            </label> -->
-            <label class="block mb-2">
-                <input type="radio" name="paymentMethod" value="Cash on Delivery"> Cash on Delivery
+                <input type="radio" name="paymentMethod" value="Cash on Delivery" class="mr-2"> Cash on Delivery
             </label>
         </div>
-        <button id="confirm-order-btn" class="p-2 bg-green-500 text-white rounded">Confirm Order</button>
+        <button id="confirm-order-btn" class="p-2 bg-green-500 text-white rounded w-full md:w-auto">Confirm Order</button>
     </div>
 
     <!-- Order Confirmation Message -->
     <div id="confirmation-message" class="hidden container mx-auto mt-8 p-4 bg-green-100 shadow rounded">
-        <p class="text-lg font-semibold">Order confirmed! Your order ID is: <span id="order-id" class="font-bold"></span></p>
+        <p class="text-lg font-semibold text-center">Order confirmed! Your order ID is: <span id="order-id" class="font-bold"></span></p>
     </div>
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-auth.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.1.3/firebase-firestore.js"></script>
-    <script src="path/to/your/utils.js"></script> -->
     <script src="checkout.js" type="module"></script>
 </body>
 </html>

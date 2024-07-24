@@ -16,6 +16,7 @@ import {
 console.log("user =>", auth);
 console.log("db =>", db);
 
+
 const profileAvatar = document.getElementById("profile-avatar");
 const mainlogin = document.getElementById("mainlogin");
 const userImg = document.getElementById("userImage");
@@ -195,23 +196,17 @@ function renderProduct(product, isInCart) {
   const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
   const buttonDisabled = isInCart ? "disabled" : "";
 
-  const productCard = `
-      <div class="product-card w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
-          <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 h-full flex flex-col">
-              <img src="${img}" alt="${productName} Image" class="w-full h-32 object-cover mb-4" />
-              <div class="p-4 flex-grow flex flex-col justify-between">
-                  <div>
-                      <h2 class="text-lg font-semibold mb-1 text-gray-900 truncate">${productName}</h2>
-                      <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Description:</span> ${productDesce}</p>
-                      <p class="text-gray-700 mb-2"><span class="font-semibold">Category:</span> ${productCategory}</p>
-                      <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Price:</span> Rs: ${productPrice}</p>
-                  </div>
-                  <div class="flex justify-between items-center mt-2">
-                      <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
-                  </div>
-              </div>
-          </div>
-      </div>`;
+  const productCard = `<div class="product-card bg-white rounded-lg shadow-lg p-2 text-center flex flex-col justify-between">
+            <img class="w-full h-48 object-cover mb-4 rounded-t-lg" src="${img}" alt="${productName}">
+            <div>
+                <h2 class="text-xl font-bold mb-2">${productName}</h2>
+                <p class="text-gray-700 mb-4">${productDesce}.</p>
+                <p class="text-blue-500 font-bold mb-4">Rs: ${productPrice}</p>
+            </div>
+            <div class="flex justify-center mt-2">
+                <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
+            </div>
+        </div>`
   
   const container = document.getElementById('product_card_container');
   if (!container.classList.contains('container')) {
