@@ -92,16 +92,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const userImage = document.getElementById('userImage');
   const userDropdown = document.getElementById('userDropdown');
 
+  console.log('User Image:', userImage);  // Add this line
+  console.log('User Dropdown:', userDropdown);  // Add this line
+
   userImage.addEventListener('click', () => {
+      console.log('User image clicked');  // Add this line
       userDropdown.classList.toggle('hidden');
   });
 
   document.addEventListener('click', (event) => {
       if (!userImage.contains(event.target) && !userDropdown.contains(event.target)) {
+          console.log('Click outside, hiding dropdown');  // Add this line
           userDropdown.classList.add('hidden');
       }
   });
 });
+
 
 getAllProducts();
 
@@ -193,21 +199,22 @@ async function getAllProducts() {
 function renderProduct(product, isInCart) {
   const { img, productName, productDesce, productPrice, productCategory, id } = product;
   const buttonText = isInCart ? "Added" : "Add to Cart";
-  const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
+  const buttonClass = isInCart ? "bg-blue-700" : "bg-blue-500";
   const buttonDisabled = isInCart ? "disabled" : "";
 
-  const productCard = `<div class="product-card bg-white rounded-lg shadow-lg p-2 text-center flex flex-col justify-between">
-            <img class="w-full h-48 object-cover mb-4 rounded-t-lg" src="${img}" alt="${productName}">
-            <div>
-                <h2 class="text-xl font-bold mb-2">${productName}</h2>
-                <p class="text-gray-700 mb-4">${productDesce}.</p>
-                <p class="text-blue-500 font-bold mb-4">Rs: ${productPrice}</p>
-            </div>
-            <div class="flex justify-center mt-2">
-                <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
-            </div>
-        </div>`
-  
+  const productCard = `<div class="product-card bg-white rounded-lg shadow-lg p-4  flex flex-col justify-between">
+        <img class="w-full h-48 object-cover mb-4 rounded-t-lg" src="${img}" alt="${productName}">
+        <div class="">
+            <h2 class="text-xl font-bold product-name">${productName}</h2>
+            <p class="text-gray-700  product-desc">${productDesce}</p>
+            <p class="text-gray-600  text-md font-bold product-price">Rs: ${productPrice}</p>
+            <p class="text-gray-600 text-md font-bold product-category">Category: ${productCategory}</p>
+        </div>
+        <div class="flex justify-center mt-2">
+            <button id="addToCartBtn-${id}" class="${buttonClass} text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
+        </div>
+    </div>`
+
   const container = document.getElementById('product_card_container');
   if (!container.classList.contains('container')) {
       container.classList.add('container', 'mx-auto', 'p-4', 'flex', 'flex-wrap', '-mx-2');
