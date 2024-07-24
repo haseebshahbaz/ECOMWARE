@@ -220,33 +220,6 @@ function renderProduct(product, isInCart) {
   container.innerHTML += productCard;
 }
 
-// function renderProduct(product, isInCart) {
-//   const { img, productName, productDesce, productPrice, productCategory, id } = product;
-//   const buttonText = isInCart ? "Added" : "Add to Cart";
-//   const buttonClass = isInCart ? "bg-green-500" : "bg-blue-500";
-//   const buttonDisabled = isInCart ? "disabled" : "";
-
-//   const productCard = `<div class="container mx-auto p-4">
-//     <div class="flex flex-wrap -mx-2">
-//         <div class="product-card w-full sm:w-1/2 md:w-1/3 px-2 mb-4">
-//             <div class="bg-white shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-//                 <img src="${img}" alt="${productName} Image" class="w-full h-32 object-cover mb-4" />
-//                 <div class="p-4">
-//                     <h2 class="text-lg font-semibold mb-1 text-gray-900 truncate">${productName}</h2>
-//                     <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Description:</span> ${productDesce}</p>
-//                     <p class="text-gray-700 mb-2"><span class="font-semibold">Category:</span> ${productCategory}</p>
-//                     <p class="text-gray-700 mb-1 text-sm"><span class="font-medium">Price:</span> Rs: ${productPrice}</p>
-//                     <div class="flex justify-between items-center mt-2">
-//                         <button id="addToCartBtn-${id}" class="${buttonClass} bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none transition duration-300" ${buttonDisabled} onclick='addToCart("${id}")'>${buttonText}</button>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//         <!-- Repeat above div for other product cards -->
-//     </div>
-// </div>`;
-//   product_card_container.innerHTML += productCard;
-// }
 
 searchForm.addEventListener('submit', async (e) => {
   e.preventDefault();

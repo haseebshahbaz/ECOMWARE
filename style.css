@@ -83,6 +83,41 @@ body {
     background: #2563eb;
 }
 
+/* Add custom styles here */
+.hero {
+    background-size: cover;
+    background-position: center;
+}
+
+/* Ensure dropdown is correctly positioned on mobile screens */
+#userDropdown {
+    right: 0;
+    left: auto;
+}
+
+/* Adjust the dropdown for mobile view */
+@media (max-width: 768px) {
+    #userProfileDropdown {
+        position: relative;
+    }
+
+    #userDropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        margin-top: 0.5rem;
+        /* width: 100%;
+        max-width: none;  */
+    }
+
+    #userProfileDropdown.show #userDropdown {
+        display: flex; /* Show dropdown when user profile is clicked */
+    }
+}
+
+
+
 @media (min-width: 768px) {
     #product_card_container {
         justify-content: space-around;
@@ -91,12 +126,17 @@ body {
     .product-card {
         flex: 1 1 calc(25% - 1rem); /* 4 cards per row */
     }
+
+
 }
+
 
 @media (max-width: 768px) {
     .product-card {
         flex: 1 1 calc(50% - 1rem); /* 2 cards per row */
     }
+
+    
 }
 
 @media (max-width: 480px) {
